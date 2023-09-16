@@ -9,6 +9,11 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
+protocol AuthenticationFormProtocol {
+    var formIsVaild: Bool { get }
+}
+
+@MainActor
 class AuthViewModel: ObservableObject{
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
@@ -22,7 +27,13 @@ class AuthViewModel: ObservableObject{
     }
     
     func signIn(withEmail email: String, password: String) async throws {
-        print("Sign in...")
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.userSession = result.user
+            await fetchUserData()
+        }catch {
+            print("DEBUG: Fail to log in with error\(error.localizedDescription)")
+        }
     }
     
     func createUser(withEmail email: String, fullname: String, password: String) async throws {

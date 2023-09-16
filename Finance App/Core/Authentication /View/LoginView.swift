@@ -62,6 +62,8 @@ struct LoginView: View {
                     .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                 }
                 .background(Color(.systemBlue))
+                .disabled(!formIsVaild)
+                .opacity(formIsVaild ? 1.0 : 0.5)
                 .cornerRadius(10)
                 .padding(.top, 10)
                 
@@ -83,6 +85,18 @@ struct LoginView: View {
             }
         }
     }
+}
+
+//Authentication Form Protocol
+extension LoginView: AuthenticationFormProtocol {
+    var formIsVaild: Bool {
+        return !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
+    }
+    
+    
 }
 
 struct LoginView_Previews: PreviewProvider {
