@@ -11,6 +11,8 @@
 		3AAD73112AB5627800C8570E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD73102AB5627800C8570E /* ContentView.swift */; };
 		3AAD73132AB5627A00C8570E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD73122AB5627A00C8570E /* Assets.xcassets */; };
 		3AAD73162AB5627A00C8570E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD73152AB5627A00C8570E /* Preview Assets.xcassets */; };
+		3AAD73242AB5844100C8570E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD73232AB5844100C8570E /* LoginView.swift */; };
+		3AAD73262AB5879D00C8570E /* inputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD73252AB5879D00C8570E /* inputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		3AAD73102AB5627800C8570E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3AAD73122AB5627A00C8570E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AAD73152AB5627A00C8570E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3AAD73232AB5844100C8570E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3AAD73252AB5879D00C8570E /* inputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +55,10 @@
 		3AAD730D2AB5627800C8570E /* Finance App */ = {
 			isa = PBXGroup;
 			children = (
-				3AAD730E2AB5627800C8570E /* Finance_AppApp.swift */,
-				3AAD73102AB5627800C8570E /* ContentView.swift */,
+				3AAD731F2AB5812600C8570E /* App */,
+				3AAD731E2AB5812400C8570E /* Components */,
+				3AAD731D2AB5812100C8570E /* Core */,
+				3AAD731C2AB580F200C8570E /* Model */,
 				3AAD73122AB5627A00C8570E /* Assets.xcassets */,
 				3AAD73142AB5627A00C8570E /* Preview Content */,
 			);
@@ -65,6 +71,62 @@
 				3AAD73152AB5627A00C8570E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3AAD731C2AB580F200C8570E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3AAD731D2AB5812100C8570E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD73212AB583C600C8570E /* Authentication  */,
+				3AAD73222AB583D400C8570E /* Profile */,
+				3AAD73202AB5838A00C8570E /* Root */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		3AAD731E2AB5812400C8570E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD73252AB5879D00C8570E /* inputView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3AAD731F2AB5812600C8570E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD730E2AB5627800C8570E /* Finance_AppApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		3AAD73202AB5838A00C8570E /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD73102AB5627800C8570E /* ContentView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		3AAD73212AB583C600C8570E /* Authentication  */ = {
+			isa = PBXGroup;
+			children = (
+				3AAD73232AB5844100C8570E /* LoginView.swift */,
+			);
+			path = "Authentication ";
+			sourceTree = "<group>";
+		};
+		3AAD73222AB583D400C8570E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +199,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AAD73242AB5844100C8570E /* LoginView.swift in Sources */,
+				3AAD73262AB5879D00C8570E /* inputView.swift in Sources */,
 				3AAD73112AB5627800C8570E /* ContentView.swift in Sources */,
 				3AAD730F2AB5627800C8570E /* Finance_AppApp.swift in Sources */,
 			);
