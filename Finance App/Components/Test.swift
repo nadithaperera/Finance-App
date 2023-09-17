@@ -1,5 +1,5 @@
 ////
-////  CustomTabBar.swift
+////  CategoryView.swift
 ////  Finance App
 ////
 ////  Created by Naditha on 2023-09-17.
@@ -7,91 +7,95 @@
 //
 //import SwiftUI
 //
-//struct CustomTabBar: View {
+//struct CategoryView: View {
+//    @State private var isAlertShowing = false
 //    @EnvironmentObject var viewModel: AuthViewModel
+//    @State private var newCategoryName: String = ""
+//    @State private var newCategoryColor = Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
+//    @State private var Categories: [Category] = [
+//        Category(id: 0, name: "Groceries", Color: .green),
+//        Category(id: 1, name: "Bills", Color: .blue),
+//        Category(id: 2, name: "Subscriptions", Color: .red)
+//    ]
 //    var body: some View {
-//
-//        HStack (spacing: 30) {
-//
-//            Button {
-//                // destination
-//            } label: {
-//                VStack (alignment: .center, spacing: 4) {
-//                    Image(systemName: "tray.and.arrow.up.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 24, height: 24)
-//                    Text("Expense")
-//                        .font(Font.footnote)
-//
+//        VStack {
+//            List {
+//                ForEach(Categories) {
+//                    Category in
+//                    HStack {
+//                        Circle()
+//                            .frame(width: 14, height: 14)
+//                            .foregroundColor(Category.Color)
+//                        Text(Category.name)
+//                    }
 //                }
 //            }
-//
-//            Button {
-//                //switch to class
-//            } label: {
-//                VStack (alignment: .center, spacing: 4) {
-//                    Image(systemName: "chart.bar.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 24, height: 24)
-//                    Text("Report")
-//                        .font(Font.footnote)
-//
-//                }
-//            }
-//
-//            Button {
-//                //switch to class
-//            } label: {
-//                VStack (alignment: .center, spacing: 4) {
-//                    Image(systemName: "plus.circle.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 24, height: 24)
-//                    Text("Add")
-//                        .font(Font.footnote)
+//            Spacer()
+//            
+//            HStack (spacing: 16) {
+//                ZStack (alignment: .trailing) {
+//                    TextField("New Category", text: $newCategoryName)
+//                        .disableAutocorrection(true)
+//                        .padding(6)
+//                        .textFieldStyle(.roundedBorder)
+//                    
+//                    if newCategoryName.count > 0{
+//                        Button {
+//                            newCategoryName = ""
+//                        } label: {
+//                            Label("Clear input", systemImage: "xmark.circle.fill")
+//                                .labelStyle(.iconOnly)
+//                                .foregroundColor(.gray)
+//                                .padding(.trailing, 10)
+//                        }
+//                    }
 //
 //                }
-//            }
-//
-//            Button {
-//                //switch to class
-//            } label: {
-//                VStack (alignment: .center, spacing: 4) {
-//                    Image(systemName: "list.clipboard.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 24, height: 24)
-//                    Text("Category")
-//                        .font(Font.footnote)
-//
+//                
+//                ColorPicker("", selection: $newCategoryColor)
+//                    .labelsHidden()
+//                
+//                Button {
+//                    if newCategoryName.count > 0 {
+//                        Categories.append(Category(id: Categories.count,
+//                                                   name: newCategoryName,
+//                                                   Color: newCategoryColor))
+//                        newCategoryName = ""
+//                    }else {
+//                        isAlertShowing = true
+//                    }
+//                    
+//                } label: {
+//                    Label("Submit", systemImage: "paperplane.fill")
+//                        .labelStyle(.iconOnly)
+//                        .padding(6)
 //                }
-//            }
-//
-//            Button {
-//                //switch to class
-//            } label: {
-//                VStack (alignment: .center, spacing: 4) {
-//                    Image(systemName: "person.crop.circle")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 24, height: 24)
-//                    Text("Profile")
-//                        .font(Font.footnote)
-//
+//                .background(.blue)
+//                .foregroundColor(.white)
+//                .cornerRadius(6)
+//                .alert("Must provide a category name!", isPresented: $isAlertShowing) {
+//                    Button("OK", role: .cancel) {
+//                        isAlertShowing = false
+//                    }
 //                }
-//            }
 //
+//            }
+//            .padding(.horizontal, 5)
+//        }
+//        
+//        VStack {
+//            Spacer()
+//            NavigationView {
+//                CustomTabBar()
+//            }
 //
 //        }
-//        .frame(height: 82)
-//
+//            //.navigationBarBackButtonHidden(true)
 //    }
 //}
 //
-//struct CustomTabBar_Previews: PreviewProvider {
+//struct CategoryView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        CustomTabBar()
+//        CategoryView()
 //    }
 //}

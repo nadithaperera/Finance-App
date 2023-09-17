@@ -14,6 +14,9 @@ struct ContentView: View {
             if viewModel.userSession != nil {
                 //ProfileView()
                 ExpenseView()
+                Spacer()
+                CustomTabBar()
+                //CategoryView()
 //                VStack {
 //                    Spacer()
 //                    CustomTabBar()
