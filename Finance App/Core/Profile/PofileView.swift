@@ -26,13 +26,14 @@ struct ProfileView: View {
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .padding(.top,4)
-                                
+                            
                             Text(user.email)
                                 .font(.footnote)
                                 .foregroundColor(.gray)
                         }
                     }
                 }
+                
                 Section ("General") {
                     HStack{
                         SettingsRowVIew(imageName: "gear",
@@ -55,18 +56,19 @@ struct ProfileView: View {
                     }
                     
                     Button {
-                        print("Delete account..")
+                    print("Delete account")
                     } label: {
                         SettingsRowVIew(imageName: "xmark.circle.fill",
                                         title: "Delete Account",
                                         tintColor: .red)
                     }
-
+                    
                 }
             }
         }
     }
 }
+
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {

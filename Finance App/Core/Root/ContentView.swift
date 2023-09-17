@@ -1,4 +1,4 @@
-//
+////
 //  ContentView.swift
 //  Finance App
 //
@@ -12,9 +12,17 @@ struct ContentView: View {
     var body: some View {
         Group {
             if viewModel.userSession != nil {
-                ProfileView()
+                //ProfileView()
+                ExpenseView()
+//                VStack {
+//                    Spacer()
+//                    CustomTabBar()
+//                }
+
             } else {
                 LoginView()
+                //Expenses()
+
             }
         }
     }
