@@ -1,12 +1,24 @@
 import SwiftUI
 
+enum Tabs: Int {
+    case expense = 0
+    case report = 1
+    case add = 2
+    case category = 3
+    case profile = 4
+}
+
 struct CustomTabBar: View {
     @EnvironmentObject var viewModel: AuthViewModel
+    @Binding var selectedTabs: Tabs
 
     var body: some View {
         HStack (spacing: 30) {
 
-            NavigationLink(destination: ExpenseView()) {
+            Button {
+                //expense
+                selectedTabs = .expense
+            } label: {
                 VStack (alignment: .center, spacing: 4) {
                     Image(systemName: "tray.and.arrow.up.fill")
                         .resizable()
@@ -16,8 +28,11 @@ struct CustomTabBar: View {
                         .font(Font.footnote)
                 }
             }
-
-            NavigationLink(destination: ReportView()) {
+            
+            Button {
+                //report
+                selectedTabs = .report
+            } label: {
                 VStack (alignment: .center, spacing: 4) {
                     Image(systemName: "chart.bar.fill")
                         .resizable()
@@ -28,7 +43,10 @@ struct CustomTabBar: View {
                 }
             }
 
-            NavigationLink(destination: AddView()) {
+            Button {
+                //Add
+                selectedTabs = .add
+            } label: {
                 VStack (alignment: .center, spacing: 4) {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
@@ -39,7 +57,10 @@ struct CustomTabBar: View {
                 }
             }
 
-            NavigationLink(destination: CategoryView()) {
+            Button {
+                //Category
+                selectedTabs = .category
+            } label: {
                 VStack (alignment: .center, spacing: 4) {
                     Image(systemName: "list.clipboard.fill")
                         .resizable()
@@ -50,7 +71,10 @@ struct CustomTabBar: View {
                 }
             }
 
-            NavigationLink(destination: ProfileView()) {
+            Button {
+                //profile
+                selectedTabs = .profile
+            } label: {
                 VStack (alignment: .center, spacing: 4) {
                     Image(systemName: "person.crop.circle")
                         .resizable()
@@ -65,8 +89,8 @@ struct CustomTabBar: View {
     }
 }
 
-struct CustomTabBar_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomTabBar()
-    }
-}
+//struct CustomTabBar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CustomTabBar()
+//    }
+//}

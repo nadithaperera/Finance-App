@@ -9,19 +9,20 @@
 //
 //struct ContentView: View {
 //    @EnvironmentObject var viewModel: AuthViewModel
+//    @State var selectedTab: Tabs = .expense
 //    var body: some View {
 //        Group {
 //            if viewModel.userSession != nil {
-//                ProfileView()
-//                VStack {
-//                    Spacer()
-//                    CustomTabBar()
-//                }
-//                
+//                //ProfileView()
+//                ExpenseView()
+//                Spacer()
+//                CustomTabBar(selectedTabs: $selectedTab)
+//            
+//
 //            } else {
 //                LoginView()
 //                //Expenses()
-//                
+//
 //            }
 //        }
 //    }
