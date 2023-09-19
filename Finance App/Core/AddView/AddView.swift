@@ -10,13 +10,13 @@ struct AddView: View {
     @State private var isAlertShowing = false
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var selectedCategory: ExpenseCategory? = nil
-//    @State private var Categories: [ExpenseCategory] = []
+    //    @State private var Categories: [ExpenseCategory] = []
     @State private var categories: [ExpenseCategory] = []
     // Placeholder variables (replace with your actual variables)
     @State private var amount: String = ""
     @State private var date: Date = Date()
     @State private var note: String = ""
-
+    
     var body: some View {
         VStack {
             Text("Add Expenses")
@@ -32,7 +32,7 @@ struct AddView: View {
                         .submitLabel(.done)
                         .keyboardType(.numberPad)
                 }
-
+                
                 HStack {
                     Text("Date")
                     Spacer()
@@ -43,7 +43,7 @@ struct AddView: View {
                         label: { Text("") }
                     )
                 }
-
+                
                 HStack {
                     Text("Note")
                     Spacer()
@@ -51,22 +51,22 @@ struct AddView: View {
                         .multilineTextAlignment(.trailing)
                         .submitLabel(.done)
                 }
-
+                
                 HStack {
-                                    Text("Category")
-                                    Spacer()
-                                    Picker("Select Category", selection: $selectedCategory) {
-                                        ForEach(categories) { category in
-                                            Text(category.name).tag(category)
-                                        }
-                                    }
-                                    .pickerStyle(MenuPickerStyle()) // Use MenuPickerStyle for a dropdown appearance
-                                }
-                            }
-                            .scrollDisabled(true)
-                            .frame(height: 275)
-                            .padding(.top, 10)
-
+                    Text("Category")
+                    Spacer()
+                    Picker("Select Category", selection: $selectedCategory) {
+                        ForEach(categories) { category in
+                            Text(category.name).tag(category)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle()) // Use MenuPickerStyle for a dropdown appearance
+                }
+            }
+            .scrollDisabled(true)
+            .frame(height: 275)
+            .padding(.top, 10)
+            
             Button {
                 // Placeholder function (replace with your actual logic)
                 handleCreate()
@@ -79,7 +79,7 @@ struct AddView: View {
             .foregroundColor(.white)
             .background(.blue)
             .cornerRadius(10)
-
+            
             Spacer()
         }
         .onAppear {
@@ -87,13 +87,13 @@ struct AddView: View {
             loadCategoriesFromFirestore()
         }
     }
-
+    
     // Placeholder function to fetch categories from Firestore
     func loadCategoriesFromFirestore() {
         // Your Firestore fetching logic here
         // Update the Categories array with fetched categories
     }
-
+    
     // Placeholder function for handling expense creation
     func handleCreate() {
         // Your logic for creating an expense here

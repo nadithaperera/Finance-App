@@ -13,7 +13,7 @@ struct CategoryView: View {
     @State private var newCategoryName: String = ""
     @State private var newCategoryColor: String = "green"
     @State private var Categories: [Category] = []
-
+    
     var body: some View {
         VStack {
             Text("Categories")
@@ -26,14 +26,14 @@ struct CategoryView: View {
                 }
             }
             Spacer()
-
+            
             HStack(spacing: 16) {
                 ZStack(alignment: .trailing) {
                     TextField("New Category", text: $newCategoryName)
                         .disableAutocorrection(true)
                         .padding(6)
                         .textFieldStyle(.roundedBorder)
-
+                    
                     if newCategoryName.count > 0 {
                         Button {
                             newCategoryName = ""
@@ -45,9 +45,9 @@ struct CategoryView: View {
                         }
                     }
                 }
-
+                
                 // You can use a Picker or ColorPicker for category color selection here
-
+                
                 Button {
                     if newCategoryName.count > 0 {
                         let newCategory = Category(id: nil, name: newCategoryName, color: newCategoryColor)
@@ -56,7 +56,7 @@ struct CategoryView: View {
                     } else {
                         isAlertShowing = true
                     }
-
+                    
                 } label: {
                     Label("Submit", systemImage: "paperplane.fill")
                         .labelStyle(.iconOnly)
@@ -77,7 +77,7 @@ struct CategoryView: View {
             loadCategoriesFromFirestore()
         }
     }
-
+    
     func addCategoryToFirestore(category: Category) {
         let db = Firestore.firestore()
         let user = Auth.auth().currentUser
@@ -86,14 +86,14 @@ struct CategoryView: View {
             print("User is not authenticated.")
             return
         }
-
+        
         let userCategoriesRef = db.collection("users").document(userUID).collection("categories")
-
+        
         let categoryData: [String: Any] = [
             "name": category.name,
             "color": category.color
         ]
-
+        
         userCategoriesRef.addDocument(data: categoryData) { error in
             if let error = error {
                 print("Error adding category: \(error.localizedDescription)")
@@ -103,7 +103,7 @@ struct CategoryView: View {
             }
         }
     }
-
+    
     func loadCategoriesFromFirestore() {
         let db = Firestore.firestore()
         let user = Auth.auth().currentUser
@@ -112,9 +112,9 @@ struct CategoryView: View {
             print("User is not authenticated.")
             return
         }
-
+        
         let userCategoriesRef = db.collection("users").document(userUID).collection("categories")
-
+        
         userCategoriesRef.getDocuments { snapshot, error in
             if let error = error {
                 print("Error fetching categories: \(error.localizedDescription)")
