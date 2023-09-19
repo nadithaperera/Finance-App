@@ -1,15 +1,15 @@
+////
+////  Category.swift
+////  Finance App
+////
+////  Created by Naditha on 2023-09-17.
+////
 //
-//  Category.swift
-//  Finance App
+//import Foundation
+//import SwiftUI
 //
-//  Created by Naditha on 2023-09-17.
-//
-
-import Foundation
-import SwiftUI
-
-struct Category: Identifiable {
-    var id: Int
-    var name: String
-    var Color: Color
-}
+//struct Category: Identifiable {
+//    //var id: Int
+//    var name: String
+//    //var Color: Color
+//}

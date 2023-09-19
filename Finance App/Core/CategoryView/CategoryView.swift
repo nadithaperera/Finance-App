@@ -1,45 +1,36 @@
-//
-//  CategoryView.swift
-//  Finance App
-//
-//  Created by Naditha on 2023-09-17.
-//
-
 import SwiftUI
+import Firebase
+
+struct Category: Identifiable {
+    var id: String?
+    var name: String
+    var color: String
+}
 
 struct CategoryView: View {
     @State private var isAlertShowing = false
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var newCategoryName: String = ""
-    @State private var newCategoryColor = Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
-    @State private var Categories: [Category] = [
-        Category(id: 0, name: "Groceries", Color: .green),
-        Category(id: 1, name: "Bills", Color: .blue),
-        Category(id: 2, name: "Subscriptions", Color: .red)
-    ]
+    @State private var newCategoryColor: String = "green"
+    @State private var Categories: [Category] = []
+
     var body: some View {
         VStack {
             List {
-                ForEach(Categories) {
-                    Category in
-                    HStack {
-                        Circle()
-                            .frame(width: 14, height: 14)
-                            .foregroundColor(Category.Color)
-                        Text(Category.name)
-                    }
+                ForEach(Categories) { category in
+                    Text(category.name)
                 }
             }
             Spacer()
-            
-            HStack (spacing: 16) {
-                ZStack (alignment: .trailing) {
+
+            HStack(spacing: 16) {
+                ZStack(alignment: .trailing) {
                     TextField("New Category", text: $newCategoryName)
                         .disableAutocorrection(true)
                         .padding(6)
                         .textFieldStyle(.roundedBorder)
-                    
-                    if newCategoryName.count > 0{
+
+                    if newCategoryName.count > 0 {
                         Button {
                             newCategoryName = ""
                         } label: {
@@ -49,22 +40,19 @@ struct CategoryView: View {
                                 .padding(.trailing, 10)
                         }
                     }
-
                 }
-                
-                ColorPicker("", selection: $newCategoryColor)
-                    .labelsHidden()
-                
+
+                // You can use a Picker or ColorPicker for category color selection here
+
                 Button {
                     if newCategoryName.count > 0 {
-                        Categories.append(Category(id: Categories.count,
-                                                   name: newCategoryName,
-                                                   Color: newCategoryColor))
+                        let newCategory = Category(id: nil, name: newCategoryName, color: newCategoryColor)
+                        addCategoryToFirestore(category: newCategory)
                         newCategoryName = ""
-                    }else {
+                    } else {
                         isAlertShowing = true
                     }
-                    
+
                 } label: {
                     Label("Submit", systemImage: "paperplane.fill")
                         .labelStyle(.iconOnly)
@@ -78,21 +66,66 @@ struct CategoryView: View {
                         isAlertShowing = false
                     }
                 }
-
             }
             .padding(.horizontal, 5)
         }
-        
-//        VStack {
-//            Spacer()
-//            CustomTabBar()
-//
-//        }
+        .onAppear {
+            loadCategoriesFromFirestore()
+        }
     }
-}
 
-struct CategoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryView()
+    func addCategoryToFirestore(category: Category) {
+        let db = Firestore.firestore()
+        let user = Auth.auth().currentUser
+        
+        guard let userUID = user?.uid else {
+            print("User is not authenticated.")
+            return
+        }
+
+        let userCategoriesRef = db.collection("users").document(userUID).collection("categories")
+
+        let categoryData: [String: Any] = [
+            "name": category.name,
+            "color": category.color
+        ]
+
+        userCategoriesRef.addDocument(data: categoryData) { error in
+            if let error = error {
+                print("Error adding category: \(error.localizedDescription)")
+            } else {
+                print("Category added successfully to Firestore")
+                loadCategoriesFromFirestore()
+            }
+        }
+    }
+
+    func loadCategoriesFromFirestore() {
+        let db = Firestore.firestore()
+        let user = Auth.auth().currentUser
+        
+        guard let userUID = user?.uid else {
+            print("User is not authenticated.")
+            return
+        }
+
+        let userCategoriesRef = db.collection("users").document(userUID).collection("categories")
+
+        userCategoriesRef.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching categories: \(error.localizedDescription)")
+            } else {
+                if let documents = snapshot?.documents {
+                    Categories = documents.compactMap { document in
+                        let data = document.data()
+                        if let name = data["name"] as? String,
+                           let color = data["color"] as? String {
+                            return Category(id: document.documentID, name: name, color: color)
+                        }
+                        return nil
+                    }
+                }
+            }
+        }
     }
 }
