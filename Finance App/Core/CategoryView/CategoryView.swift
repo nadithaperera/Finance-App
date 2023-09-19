@@ -16,6 +16,10 @@ struct CategoryView: View {
 
     var body: some View {
         VStack {
+            Text("Categories")
+                .fontWeight(.bold)
+                .font(.title)
+                .padding(.top, 10)
             List {
                 ForEach(Categories) { category in
                     Text(category.name)
