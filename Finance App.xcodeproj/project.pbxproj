@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A0972472AB6CA1C0046A24E /* ExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0972462AB6CA1C0046A24E /* ExpenseView.swift */; };
+		3A10C2902ABB4EC300F9FEE9 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C28F2ABB4EC300F9FEE9 /* Test.swift */; };
 		3A30BBBC2AB6F5D10033C95C /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30BBBB2AB6F5D10033C95C /* ReportView.swift */; };
 		3A30BBBE2AB6FFCF0033C95C /* PofileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30BBBD2AB6FFCF0033C95C /* PofileView.swift */; };
 		3A30BBC02AB712DE0033C95C /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A30BBBF2AB712DE0033C95C /* CustomTabBar.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		3A0972462AB6CA1C0046A24E /* ExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseView.swift; sourceTree = "<group>"; };
+		3A10C28F2ABB4EC300F9FEE9 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		3A30BBBB2AB6F5D10033C95C /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		3A30BBBD2AB6FFCF0033C95C /* PofileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PofileView.swift; sourceTree = "<group>"; };
 		3A30BBBF2AB712DE0033C95C /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				3A0972462AB6CA1C0046A24E /* ExpenseView.swift */,
+				3A10C28F2ABB4EC300F9FEE9 /* Test.swift */,
 			);
 			path = Expenses;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				3A30BBC22AB722220033C95C /* Test.swift in Sources */,
 				3AAD73112AB5627800C8570E /* ContentView.swift in Sources */,
 				3AAD733D2AB5AFF600C8570E /* AuthVIewModel.swift in Sources */,
+				3A10C2902ABB4EC300F9FEE9 /* Test.swift in Sources */,
 				3AAD732E2AB5A77E00C8570E /* User.swift in Sources */,
 				3A30BBCC2AB72EAD0033C95C /* Test2.swift in Sources */,
 				3AAD730F2AB5627800C8570E /* Finance_AppApp.swift in Sources */,

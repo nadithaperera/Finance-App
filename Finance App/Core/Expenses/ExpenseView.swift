@@ -10,86 +10,77 @@ struct Expense: Identifiable {
 }
 
 struct ExpenseView: View {
-    @State private var searchText = ""
-    @State private var selectedFilter = FilterType.thisMonth
-
-    enum FilterType: String, CaseIterable {
-        case today = "Today"
-        case thisWeek = "This Week"
-        case thisMonth = "This Month"
-    }
+    // Dummy data for testing
+    let dummyExpenses: [Expense] = [
+        Expense(id: "1", amount: 50.0, date: Date(), note: "Dinner", category: "Food"),
+        Expense(id: "2", amount: 30.0, date: Date(), note: "Gasoline", category: "Transportation"),
+        // Add more dummy expenses here
+    ]
 
     @State private var expenses: [Expense] = []
+    @State private var searchText = ""
 
     var body: some View {
-        VStack {
-            Text("Expenses")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.top, 20)
+        NavigationView {
+            VStack(spacing: 10) {
+                Text("Expense Tracker")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
 
-            HStack {
-                TextField("Search expenses", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
+                TextField("Search Expenses", text: $searchText)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 8)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(16)
 
-                Picker("Filter", selection: $selectedFilter) {
-                    ForEach(FilterType.allCases, id: \.self) { filter in
-                        Text(filter.rawValue)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.horizontal)
-            }
-
-            List {
-                ForEach(expenses) { expense in
-                    VStack(alignment: .leading) {
-                        Text("Amount: \(expense.amount)")
-                        Text("Date: \(expense.date)")
-                        Text("Note: \(expense.note)")
-                        Text("Category: \(expense.category)")
-                    }
+                List(expenses.filter {
+                    searchText.isEmpty || $0.note.localizedCaseInsensitiveContains(searchText)
+                }) { expense in
+                    ExpenseRow(expense: expense)
                 }
             }
+            .navigationBarTitle("", displayMode: .large)
+            .onAppear {
+                // Load dummy data for testing
+                expenses = dummyExpenses
+            }
         }
-        .onAppear {
-            fetchExpenses()
+        .padding(.vertical, 10)
+    }
+}
+
+struct ExpenseRow: View {
+    let expense: Expense
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Amount: Rs. \(String(format: "%.2f", expense.amount))")
+                .font(.title2)
+                .foregroundColor(.primary)
+
+            Text("Date: \(formattedDate)")
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            Text("Category: \(expense.category)")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
     }
 
-    func fetchExpenses() {
-        let db = Firestore.firestore()
-        let user = Auth.auth().currentUser
+    var formattedDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: expense.date)
+    }
+}
 
-        guard let userUID = user?.uid else {
-            print("User is not authenticated.")
-            return
-        }
-
-        let userExpensesRef = db.collection("users").document(userUID).collection("expenses") // Use "expenses" as the collection name
-
-        // Placeholder implementation to fetch all expenses
-        userExpensesRef.getDocuments { snapshot, error in
-            if let error = error {
-                print("Error fetching expenses: \(error.localizedDescription)")
-            } else {
-                if let documents = snapshot?.documents {
-                    self.expenses.removeAll()
-
-                    for document in documents {
-                        let data = document.data()
-                        if let amount = data["amount"] as? Double,
-                           let date = data["date"] as? Date,
-                           let note = data["note"] as? String,
-                           let category = data["category"] as? String {
-                            let id = document.documentID
-                            let expense = Expense(id: id, amount: amount, date: date, note: note, category: category)
-                            self.expenses.append(expense)
-                        }
-                    }
-                }
-            }
-        }
+struct ExpenseView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExpenseView()
     }
 }
