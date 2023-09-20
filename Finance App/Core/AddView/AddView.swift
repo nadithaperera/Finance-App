@@ -9,92 +9,110 @@ struct ExpenseCategory: Identifiable, Hashable {
 struct AddView: View {
     @State private var isAlertShowing = false
     @EnvironmentObject var viewModel: AuthViewModel
-    @State private var selectedCategory: ExpenseCategory? = nil
-    //    @State private var Categories: [ExpenseCategory] = []
     @State private var categories: [ExpenseCategory] = []
-    // Placeholder variables (replace with your actual variables)
     @State private var amount: String = ""
     @State private var date: Date = Date()
     @State private var note: String = ""
-    
+
+    @State private var selectedCategoryIndex = 0
+
+    var selectedCategory: ExpenseCategory? {
+        if categories.indices.contains(selectedCategoryIndex) {
+            return categories[selectedCategoryIndex]
+        }
+        return nil
+    }
+
     var body: some View {
         VStack {
             Text("Add Expenses")
+                .font(.largeTitle)
                 .fontWeight(.bold)
-                .font(.title)
-                .padding(.top, 10)
-            List {
-                HStack {
-                    Text("Amount")
-                    Spacer()
-                    TextField("Amount", text: $amount)
-                        .multilineTextAlignment(.trailing)
-                        .submitLabel(.done)
-                        .keyboardType(.numberPad)
-                }
-                
-                HStack {
-                    Text("Date")
-                    Spacer()
-                    DatePicker(
-                        selection: $date,
-                        in: Date()...,
-                        displayedComponents: .date,
-                        label: { Text("") }
-                    )
-                }
-                
-                HStack {
-                    Text("Note")
-                    Spacer()
-                    TextField("Note", text: $note)
-                        .multilineTextAlignment(.trailing)
-                        .submitLabel(.done)
-                }
-                
-                HStack {
-                    Text("Category")
-                    Spacer()
-                    Picker("Select Category", selection: $selectedCategory) {
-                        ForEach(categories) { category in
-                            Text(category.name).tag(category)
-                        }
+                .padding(.top, 20)
+
+            VStack(alignment: .leading, spacing: 20) {
+                TextField("Amount", text: $amount)
+                    .keyboardType(.decimalPad)
+                    .padding(10)
+                    .background(Color.white)
+                    .cornerRadius(10)
+
+                DatePicker("Date", selection: $date, displayedComponents: .date)
+                    .padding(10)
+                    .background(Color.white)
+                    .cornerRadius(10)
+
+                TextField("Note", text: $note)
+                    .padding(10)
+                    .background(Color.white)
+                    .cornerRadius(10)
+
+                Picker("Category", selection: $selectedCategoryIndex) {
+                    ForEach(0..<categories.count, id: \.self) { index in
+                        Text(categories[index].name)
                     }
-                    .pickerStyle(MenuPickerStyle()) // Use MenuPickerStyle for a dropdown appearance
                 }
+                .pickerStyle(DefaultPickerStyle())
+                .padding(10)
+                .background(Color.white)
+                .cornerRadius(10)
             }
-            .scrollDisabled(true)
-            .frame(height: 275)
-            .padding(.top, 10)
-            
-            Button {
-                // Placeholder function (replace with your actual logic)
+            .padding(20)
+
+            Button(action: {
                 handleCreate()
-            } label: {
-                Label("Submit expense", systemImage: "plus")
-                    .labelStyle(.titleOnly)
-                    .padding(.horizontal, 44)
-                    .padding(.vertical, 12)
+            }) {
+                Text("Submit Expense")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(10)
             }
-            .foregroundColor(.white)
-            .background(.blue)
-            .cornerRadius(10)
-            
+            .padding(20)
+
             Spacer()
         }
         .onAppear {
-            // Fetch categories from Firestore
-            loadCategoriesFromFirestore()
+            // Fetch categories for the AddView when it appears
+            loadCategoriesForAddView()
         }
     }
-    
-    // Placeholder function to fetch categories from Firestore
-    func loadCategoriesFromFirestore() {
-        // Your Firestore fetching logic here
-        // Update the Categories array with fetched categories
+
+    func loadCategoriesForAddView() {
+        let db = Firestore.firestore()
+        let user = Auth.auth().currentUser
+
+        guard let userUID = user?.uid else {
+            print("User is not authenticated.")
+            return
+        }
+
+        let userCategoriesRef = db.collection("users").document(userUID).collection("categories")
+
+        userCategoriesRef.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching categories: \(error.localizedDescription)")
+            } else {
+                if let documents = snapshot?.documents {
+                    self.categories.removeAll()
+
+                    for document in documents {
+                        let data = document.data()
+                        if let name = data["name"] as? String,
+                           let color = data["color"] as? String {
+                            // Ensure that the "id" field is retrieved as a string
+                            let id = document.documentID
+                            let category = ExpenseCategory(id: id, name: name)
+                            self.categories.append(category)
+                        }
+                    }
+                }
+            }
+        }
     }
-    
-    // Placeholder function for handling expense creation
+
     func handleCreate() {
         // Your logic for creating an expense here
     }
