@@ -144,11 +144,13 @@ struct AddView: View {
                 print("Error adding expense: \(error.localizedDescription)")
             } else {
                 print("Expense added successfully.")
-                // Optionally, you can reset the form fields here.
+                // Reset the form fields
+                amount = ""
+                date = Date()
+                note = ""
             }
         }
     }
-
 }
 
 struct AddView_Previews: PreviewProvider {
