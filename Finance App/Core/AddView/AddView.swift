@@ -114,8 +114,41 @@ struct AddView: View {
     }
 
     func handleCreate() {
-        // Your logic for creating an expense here
+        let db = Firestore.firestore()
+        let user = Auth.auth().currentUser
+
+        guard let userUID = user?.uid else {
+            print("User is not authenticated.")
+            return
+        }
+
+        guard let selectedCategory = selectedCategory else {
+            print("No category selected.")
+            return
+        }
+
+        guard let amountDouble = Double(amount) else {
+            print("Invalid amount.")
+            return
+        }
+
+        let expenseData: [String: Any] = [
+            "amount": amountDouble,
+            "date": date,
+            "note": note,
+            "category": selectedCategory.name
+        ]
+
+        db.collection("users").document(userUID).collection("expenses").addDocument(data: expenseData) { error in
+            if let error = error {
+                print("Error adding expense: \(error.localizedDescription)")
+            } else {
+                print("Expense added successfully.")
+                // Optionally, you can reset the form fields here.
+            }
+        }
     }
+
 }
 
 struct AddView_Previews: PreviewProvider {
