@@ -28,6 +28,7 @@
 		3AAD73372AB5AF1500C8570E /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAD73362AB5AF1500C8570E /* FirebaseFirestoreSwift */; };
 		3AAD73392AB5AF1500C8570E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAD73382AB5AF1500C8570E /* FirebaseStorage */; };
 		3AAD733D2AB5AFF600C8570E /* AuthVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD733C2AB5AFF600C8570E /* AuthVIewModel.swift */; };
+		3AFFE2A02ABC5A5E00D69AE2 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3AFFE29F2ABC5A5E00D69AE2 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,11 +36,8 @@
 		3A30BBBB2AB6F5D10033C95C /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		3A30BBBD2AB6FFCF0033C95C /* PofileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PofileView.swift; sourceTree = "<group>"; };
 		3A30BBBF2AB712DE0033C95C /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		3A30BBC12AB722220033C95C /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		3A30BBC42AB723480033C95C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		3A30BBC72AB723650033C95C /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
-		3A30BBC92AB7250D0033C95C /* Test1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1.swift; sourceTree = "<group>"; };
-		3A30BBCB2AB72EAD0033C95C /* Test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
 		3AAD730B2AB5627800C8570E /* Finance App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Finance App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AAD730E2AB5627800C8570E /* Finance_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finance_AppApp.swift; sourceTree = "<group>"; };
 		3AAD73102AB5627800C8570E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +61,7 @@
 				3AAD73392AB5AF1500C8570E /* FirebaseStorage in Frameworks */,
 				3AAD73352AB5AF1500C8570E /* FirebaseFirestore in Frameworks */,
 				3AAD73372AB5AF1500C8570E /* FirebaseFirestoreSwift in Frameworks */,
+				3AFFE2A02ABC5A5E00D69AE2 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,9 +166,6 @@
 				3AAD73252AB5879D00C8570E /* inputView.swift */,
 				3AAD732B2AB5A1C900C8570E /* SettingsRowVIew.swift */,
 				3A30BBBF2AB712DE0033C95C /* CustomTabBar.swift */,
-				3A30BBC12AB722220033C95C /* Test.swift */,
-				3A30BBC92AB7250D0033C95C /* Test1.swift */,
-				3A30BBCB2AB72EAD0033C95C /* Test2.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -245,6 +241,7 @@
 				3AAD73342AB5AF1500C8570E /* FirebaseFirestore */,
 				3AAD73362AB5AF1500C8570E /* FirebaseFirestoreSwift */,
 				3AAD73382AB5AF1500C8570E /* FirebaseStorage */,
+				3AFFE29F2ABC5A5E00D69AE2 /* SwiftUICharts */,
 			);
 			productName = "Finance App";
 			productReference = 3AAD730B2AB5627800C8570E /* Finance App.app */;
@@ -276,6 +273,7 @@
 			mainGroup = 3AAD73022AB5627800C8570E;
 			packageReferences = (
 				3AAD73312AB5AF1500C8570E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3AFFE29E2ABC5A5E00D69AE2 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 3AAD730C2AB5627800C8570E /* Products */;
 			projectDirPath = "";
@@ -526,6 +524,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		3AFFE29E2ABC5A5E00D69AE2 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -548,6 +554,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3AAD73312AB5AF1500C8570E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		3AFFE29F2ABC5A5E00D69AE2 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AFFE29E2ABC5A5E00D69AE2 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
