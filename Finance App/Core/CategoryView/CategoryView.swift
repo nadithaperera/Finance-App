@@ -1,5 +1,6 @@
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 struct Category: Identifiable {
     var id: String?
@@ -47,7 +48,6 @@ struct CategoryView: View {
                     }
                 }
 
-                // You can use a Picker or ColorPicker for category color selection here
 
                 Button {
                     if newCategoryName.count > 0 {

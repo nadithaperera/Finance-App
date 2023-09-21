@@ -1,5 +1,6 @@
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 
 struct ExpenseCategory: Identifiable, Hashable {
     var id: String?
