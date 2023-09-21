@@ -1,12 +1,5 @@
-//
-//  ReportView.swift
-//  Finance App
-//
-//  Created by Naditha on 2023-09-17.
-//
-
 import SwiftUI
-import SwiftUICharts // Import the SwiftUICharts library
+import SwiftUICharts
 
 struct Transaction {
     var title: String
@@ -29,36 +22,47 @@ struct ReportView: View {
     ]
     
     var body: some View {
-        VStack {
-            Picker("Select Report", selection: $selectedReportIndex) {
-                Text("Income Report").tag(0)
-                Text("Expense Report").tag(1)
+        ScrollView {
+            VStack {
+                Picker("Select Report", selection: $selectedReportIndex) {
+                    Text("Income Report").tag(0)
+                    Text("Expense Report").tag(1)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                if selectedReportIndex == 0 {
+                    IncomeReportView(transactions: incomeTransactions)
+                } else {
+                    ExpenseReportView(transactions: expenseTransactions)
+                }
             }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            
-            if selectedReportIndex == 0 {
-                IncomeReportView(transactions: incomeTransactions)
-            } else {
-                ExpenseReportView(transactions: expenseTransactions)
-            }
+            .navigationTitle("Reports")
         }
-        .navigationTitle("Reports")
     }
 }
 
 struct IncomeReportView: View {
     let transactions: [Transaction]
-    
+
     var body: some View {
         VStack {
-            BarChartView(data: ChartData(points: transactions.map { $0.amount }),
-                         title: "Income",
-                         legend: "Amount",
-                         style: Styles.barChartStyleOrangeLight,
-                         form: ChartForm.extraLarge)
+            LineView(data: transactions.map { $0.amount },
+                     title: "Income Over Time",
+                     legend: "Legend")
                 .padding()
-            
+                .background(Color.white)
+                .cornerRadius(12)
+                .shadow(radius: 5)
+
+            PieChartView(data: transactions.map { $0.amount },
+                         title: "Income Distribution",
+                         legend: "Legend")
+                .padding()
+                .background(Color.white)
+                .cornerRadius(12)
+                .shadow(radius: 5)
+
             List(transactions, id: \.title) { transaction in
                 HStack {
                     Text(transaction.title)
@@ -66,22 +70,32 @@ struct IncomeReportView: View {
                     Text("$\(transaction.amount, specifier: "%.2f")")
                 }
             }
+            .animation(.easeInOut)
         }
     }
 }
 
 struct ExpenseReportView: View {
     let transactions: [Transaction]
-    
+
     var body: some View {
         VStack {
-            BarChartView(data: ChartData(points: transactions.map { $0.amount }),
-                         title: "Expenses",
-                         legend: "Amount",
-                         style: Styles.barChartStyleNeonBlueLight,
-                         form: ChartForm.extraLarge)
+            LineView(data: transactions.map { $0.amount },
+                     title: "Expenses Over Time",
+                     legend: "Legend")
                 .padding()
-            
+                .background(Color.white)
+                .cornerRadius(12)
+                .shadow(radius: 5)
+
+            PieChartView(data: transactions.map { $0.amount },
+                         title: "Expense Distribution",
+                         legend: "Legend")
+                .padding()
+                .background(Color.white)
+                .cornerRadius(12)
+                .shadow(radius: 5)
+
             List(transactions, id: \.title) { transaction in
                 HStack {
                     Text(transaction.title)
@@ -89,6 +103,7 @@ struct ExpenseReportView: View {
                     Text("$\(transaction.amount, specifier: "%.2f")")
                 }
             }
+            .animation(.easeInOut)
         }
     }
 }

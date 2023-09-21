@@ -29,6 +29,7 @@
 		3AAD73392AB5AF1500C8570E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3AAD73382AB5AF1500C8570E /* FirebaseStorage */; };
 		3AAD733D2AB5AFF600C8570E /* AuthVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAD733C2AB5AFF600C8570E /* AuthVIewModel.swift */; };
 		3AFFE2A02ABC5A5E00D69AE2 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3AFFE29F2ABC5A5E00D69AE2 /* SwiftUICharts */; };
+		3AFFE2A22ABC5AD400D69AE2 /* Test31.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFE2A12ABC5AD400D69AE2 /* Test31.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		3AAD732D2AB5A77E00C8570E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3AAD732F2AB5ADAA00C8570E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3AAD733C2AB5AFF600C8570E /* AuthVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVIewModel.swift; sourceTree = "<group>"; };
+		3AFFE2A12ABC5AD400D69AE2 /* Test31.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test31.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				3A30BBBB2AB6F5D10033C95C /* ReportView.swift */,
+				3AFFE2A12ABC5AD400D69AE2 /* Test31.swift */,
 			);
 			path = Reports;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				3A0972472AB6CA1C0046A24E /* ExpenseView.swift in Sources */,
 				3A30BBBC2AB6F5D10033C95C /* ReportView.swift in Sources */,
 				3AAD73242AB5844100C8570E /* LoginView.swift in Sources */,
+				3AFFE2A22ABC5AD400D69AE2 /* Test31.swift in Sources */,
 				3AAD732C2AB5A1C900C8570E /* SettingsRowVIew.swift in Sources */,
 				3A30BBC02AB712DE0033C95C /* CustomTabBar.swift in Sources */,
 				3AAD73262AB5879D00C8570E /* inputView.swift in Sources */,
