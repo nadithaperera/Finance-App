@@ -55,13 +55,13 @@ struct ProfileView: View {
                                         tintColor: .red)
                     }
                     
-                    Button {
-                    print("Delete account")
-                    } label: {
-                        SettingsRowVIew(imageName: "xmark.circle.fill",
-                                        title: "Delete Account",
-                                        tintColor: .red)
-                    }
+//                    Button {
+//                    print("Delete account")
+//                    } label: {
+//                        SettingsRowVIew(imageName: "xmark.circle.fill",
+//                                        title: "Delete Account",
+//                                        tintColor: .red)
+//                    }
                     
                 }
             }

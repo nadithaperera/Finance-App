@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "logo02-removebg-preview.png",
+      "filename" : "Logo--modified.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Logo--modified 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Logo--modified 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -18,7 +18,7 @@ struct LoginView: View {
                 Image("logo02-removebg-preview")
                    .resizable()
                    .scaledToFill()
-                   .frame(width: 300, height: 150)
+                   .frame(width: 90, height: 90)
                    .padding(.vertical, 32)
                 
                 
